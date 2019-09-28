@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  svfs:
+    build:
+      context: .
+    image: ichikawayukko/svfs_gateway
+    restart: always
+    env_file: openstack.env
+    devices:
+      - "/dev/fuse"
+    cap_add:
+      - SYS_ADMIN

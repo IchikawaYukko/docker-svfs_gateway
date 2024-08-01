@@ -1,6 +1,6 @@
 FROM		python:3.8-alpine3.19
 
-RUN		apk add fuse wget ruby pv curl bash rpm gcc linux-headers musl-dev && \
+RUN		apk add pv fuse wget ruby pv curl bash rpm gcc linux-headers musl-dev && \
 		python -m pip install --upgrade pip==24.2 --root-user-action ignore && \
 		pip install python-swiftclient python-keystoneclient --root-user-action ignore && \
 		curl -sLO https://github.com/ovh/svfs/releases/download/v0.9.1/svfs-0.9.1-1.x86_64.rpm && \

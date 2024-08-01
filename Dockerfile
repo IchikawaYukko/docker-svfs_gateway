@@ -10,13 +10,13 @@ RUN		apk add fuse wget ruby pv curl bash rpm gcc linux-headers musl-dev && \
 		apk del gcc linux-headers musl-dev rpm curl && \
 		echo '#!/bin/sh' >> /usr/local/bin/entrypoint.sh && \
 		echo 'if [ -z $CONTAINER ]; then' >> /usr/local/bin/entrypoint.sh && \
-		echo 'mount -t svfs -o segment_size=256 /dev/svfs /mnt' >> /usr/local/bin/entrypoint.sh && \
+		echo '  mount -t svfs -o segment_size=256 /dev/svfs /mnt' >> /usr/local/bin/entrypoint.sh && \
 		echo 'else' >> /usr/local/bin/entrypoint.sh && \
-		echo 'if [ -z $SEGMENT_SIZE ]; then' >> /usr/local/bin/entrypoint.sh && \
-		echo 'mount -t svfs -o segment_size=256,container=$CONTAINER /dev/svfs /mnt' >> /usr/local/bin/entrypoint.sh && \
-		echo 'else' >> /usr/local/bin/entrypoint.sh && \
-		echo 'mount -t svfs -o segment_size=$SEGMENT_SIZE,container=$CONTAINER  /dev/svfs /mnt' >> /usr/local/bin/entrypoint.sh && \
-		echo 'fi' >> /usr/local/bin/entrypoint.sh && \
+		echo '  if [ -z $SEGMENT_SIZE ]; then' >> /usr/local/bin/entrypoint.sh && \
+		echo '    mount -t svfs -o segment_size=256,container=$CONTAINER /dev/svfs /mnt' >> /usr/local/bin/entrypoint.sh && \
+		echo '  else' >> /usr/local/bin/entrypoint.sh && \
+		echo '    mount -t svfs -o segment_size=$SEGMENT_SIZE,container=$CONTAINER /dev/svfs /mnt' >> /usr/local/bin/entrypoint.sh && \
+		echo '  fi' >> /usr/local/bin/entrypoint.sh && \
 		echo 'fi' >> /usr/local/bin/entrypoint.sh && \
 		echo 'exec "$@"' >> /usr/local/bin/entrypoint.sh && \
 		chmod +x /usr/local/bin/entrypoint.sh
